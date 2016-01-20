@@ -1,0 +1,21 @@
+{
+    "name": "lehter/monitor",
+    "description": "Laravel 5 package for lehter.com monitor",
+    "type": "library",
+    "require": {
+        "jenssegers/raven": "^1.4"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Karl-Sander Erss",
+            "email": "karl.erss@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Lehter\\Monitor\\": "packages/lehter/monitor/src"
+        }
+    }
+}
