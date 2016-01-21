@@ -14,6 +14,9 @@ class LehterMonitorServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        if(!env('LEHTER_DSN')){
+            return;
+        }
         if ( ! $this->listenerRegistered)
         {
             $this->registerListener();
@@ -28,12 +31,17 @@ class LehterMonitorServiceProvider extends ServiceProvider
     public function register()
     {
         $app = $this->app;
-
+        if(!env('LEHTER_DSN')){
+            return;
+        }
         $this->app['raven.client'] = $this->app->share(function ($app)
         {
-            $config = $app['config']->get('services.lehtermonitor', []);
 
-            $dsn = $app['config']->get('services.lehtermonitor.dsn');
+            $config['dsn'] = env('LEHTER_DSN');
+            $config['level'] = env('LEHTER_LEVEL');
+            $config['curl_method'] = env('LEHTER_CURL_METHOD');
+
+            $dsn = env('LEHTER_DSN');
 
             if ( ! $dsn)
             {
@@ -53,7 +61,7 @@ class LehterMonitorServiceProvider extends ServiceProvider
 
         $this->app['raven.handler'] = $this->app->share(function ($app)
         {
-            $level = $app['config']->get('services.lehtermonitor.level', 'debug');
+            $level = env('LEHTER_LEVEL');
 
             return new LehterLogHandler($app['raven.client'], $app, $level);
         });

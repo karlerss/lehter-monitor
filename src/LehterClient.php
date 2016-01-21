@@ -130,9 +130,9 @@ class LehterClient extends Raven_Client
         if (!$this->server) {
             return;
         }
-
+        //dd($data);
         $message = Raven_Compat::json_encode($data);
-
+        //dd($message);
         if (function_exists("gzcompress")) {
             $message = gzcompress($message);
         }
@@ -142,9 +142,6 @@ class LehterClient extends Raven_Client
         $timestamp = microtime(true);
         $headers = array(
             'User-Agent' => $client_string,
-            'X-Sentry-Auth' => $this->get_auth_header(
-                $timestamp, $client_string, $this->public_key,
-                $this->secret_key),
             'Content-Type' => 'application/octet-stream'
         );
 
