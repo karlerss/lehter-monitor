@@ -15,8 +15,7 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "App\\": "app/",
-            "Lehter\\Monitor\\": "packages/lehter/monitor/src"
+            "Lehter\\Monitor\\": "src/"
         }
     }
 }
